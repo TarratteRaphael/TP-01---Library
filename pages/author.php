@@ -1,7 +1,7 @@
 <?php
 
 /**
- * CE FICHIER DOIT AFFICHER UN LIVRE. 
+ * CE FICHIER DOIT AFFICHER UN AUTEUR ET SES LIVRES. 
  */
 
 /**
@@ -16,17 +16,17 @@
  * 1. On récupère le paramètre d'url id
  */
 // on déclare la variable qui va récevoir l'id et on l'initialise avec rien.
-$book_id = null;
+$author_id = null;
 
 // on vérifie l'existance d'un paramètre id, non null, de type numérique
 if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
     // on nettoie le paramètre pour se protéger contre les injections de code.
-    $book_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $author_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 }
 
 // s'il n'existe pas de paramètre, on affiche le message d'erreur
 
-if (!$book_id) {
+if (!$author_id) {
     die("Vous devez définir un paramètre id valide dans l'url");
 }
 
@@ -37,34 +37,48 @@ if (!$book_id) {
  * - Le mode de récupération des données par défault (tableau associatif).
  */
 
-$pdo = new PDO('mysql:dbname=library;host=localhost;charset=utf8', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+include_once DOCUMENT_ROOT.'/database/db_connect.php';
+
 
 /**
- * 2. On récupère le livre.
+ * 2. On récupère l'auteur.
  */
 
 // on utilise la méthode prepare car notre requête a pas besoin d'un paramètre envoyé par l'utilisateur.
 
-$stmt = $pdo->prepare('SELECT * FROM `books` INNER JOIN `authors` ON `books`.`author_id` = `authors`.`id` WHERE `books`.`id` = ?');
+$stmt = $pdo->prepare('SELECT * FROM `authors` WHERE `id` = ?');
 
 // on exécute la requête en précisant la valeur du paramètre
 
-$stmt->execute([$book_id]);
+$stmt->execute([$author_id]);
 
 //  on extrait les données de la réponse réçue.
 
-$book = $stmt->fetch();
+$author = $stmt->fetch();
+
+/**
+ * 2. On récupère les livres de l'auteur.
+ */
+
+// on utilise la méthode prepare car notre requête a pas besoin d'un paramètre envoyé par l'utilisateur.
+
+$stmt = $pdo->prepare('SELECT * FROM `books` WHERE `books`.`author_id` = ?');
+
+// on exécute la requête en précisant la valeur du paramètre
+
+$stmt->execute([$author['id']]);
+
+//  on extrait les données de la réponse réçue.
+
+$books = $stmt->fetchAll();
 
 
 /**
  * On affiche la page
  */
-$title = $book['title'];
+$title = $author['name'];
 
-$heading = $book['title'];
+$heading = $author['name'];
 ?>
 
 <!DOCTYPE html>
@@ -91,20 +105,30 @@ $heading = $book['title'];
         </div>
     </header>
     <header>
-        <h1><?= $book['title'] ?></h1>
+        <h1>
+            <?= $author['name'] ?>
+        </h1>
     </header>
 
     <main>
         <section>
-            <h2><?= $book['subtitle'] ?></h2>
-            <h3><a href="author.php?id=<?= $book['author_id'] ?>"><i><?= $book['name'] ?></i></a></h3>
-            <p><?= $book['description'] ?></p>
-            <p>Édition <?= $book['publisher'] ?> | date <?= $book['published'] ?> | p. <?= $book['pages'] ?></p>
-            <a href="<?= $book['website'] ?>">site internet</a>
+            <p>
+                <?= $author['biography'] ?>
+            </p>
+            <h2>Ouvrages publiés </h2>
+            <ul>
+                <?php foreach ($books as $book): ?>
+                    <li><a href="book.php?id=<?= $book['id'] ?>">
+                            <?= $book['title'] ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         </section>
     </main>
+
     <footer class="footer">
-        <p>&copy;<?= date('Y') ?></p>
+        <p>&copy; <?= date('Y') ?></p>
         <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
                 href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </footer>

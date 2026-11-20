@@ -1,4 +1,5 @@
 <?php
+define("DOCUMENT_ROOT", $_SERVER['DOCUMENT_ROOT']);
 
 /**
  * CE FICHIER EST LA PAGE D'ACCUEIL DU SITE. ELLE DOIT AFFICHER LA LISTE DES LIVRES DISPONIBLES DANS NOTRE BIBLIOTHEQUE.
@@ -13,11 +14,7 @@
  * - Le mode de récupération des données par défault (tableau associatif).
  */
 
-
-$pdo = new PDO('mysql:dbname=library;host=localhost;charset=utf8', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+include_once DOCUMENT_ROOT.'/database/db_connect.php';
 
 
 /**
@@ -68,7 +65,7 @@ $heading = 'Catalogue des livres';
                 </h2>
                 <!-- on crée un lien vers la page d'un auteur -->
                 <div class="book-card__body">
-                    <h3 class="book-card__subheading"><a href="author.php?id=<?= $book['author_id'] ?>">
+                    <h3 class="book-card__subheading"><a href="/pages/author.php?id=<?= $book['author_id'] ?>">
                             <i>
                                 <?= $book['name'] ?>
                             </i>
