@@ -37,6 +37,7 @@ if (!$book_id) {
  * - Le mode de récupération des données par défault (tableau associatif).
  */
 
+include_once $_SERVER['DOCUMENT_ROOT'].'/partials/config.php';
 include_once DOCUMENT_ROOT.'/database/db_connect.php';
 
 /**

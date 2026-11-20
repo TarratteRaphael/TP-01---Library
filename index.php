@@ -1,5 +1,4 @@
 <?php
-define("DOCUMENT_ROOT", $_SERVER['DOCUMENT_ROOT']);
 
 /**
  * CE FICHIER EST LA PAGE D'ACCUEIL DU SITE. ELLE DOIT AFFICHER LA LISTE DES LIVRES DISPONIBLES DANS NOTRE BIBLIOTHEQUE.
@@ -13,7 +12,7 @@ define("DOCUMENT_ROOT", $_SERVER['DOCUMENT_ROOT']);
  * - Le mode d'erreur exception : permet de léver des exceptions lorsqu'une erreur sql est rencontrée.
  * - Le mode de récupération des données par défault (tableau associatif).
  */
-
+include_once $_SERVER['DOCUMENT_ROOT'].'/partials/config.php';
 include_once DOCUMENT_ROOT.'/database/db_connect.php';
 
 
@@ -76,8 +75,8 @@ $heading = 'Catalogue des livres';
                     </p>
                 </div>
                 <div class="book-card__footer">
-                    <a href="book.php?id=<?= $book['id'] ?>">En savoir plus</a>
-                    <form id="form-<?= $book['id'] ?>" action="delete-book.php" method="post">
+                    <a href="pages/book.php?id=<?= $book['id'] ?>">En savoir plus</a>
+                    <form id="form-<?= $book['id'] ?>" action="pages/delete-book.php" method="post">
                         <input type="hidden" name="id" value="<?= $book['id'] ?>">
                         <button>Supprimer</button>
                     </form>
