@@ -51,7 +51,6 @@ $stmt = $pdo->prepare('DELETE FROM `books` WHERE `id` = ?');
 
 $stmt->execute([$book_id]);
 
-
 /**
  * On redirige vers le catalogue de livres
  */
