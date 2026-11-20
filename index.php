@@ -12,12 +12,8 @@
  * - Le mode d'erreur exception : permet de léver des exceptions lorsqu'une erreur sql est rencontrée.
  * - Le mode de récupération des données par défault (tableau associatif).
  */
-
-
-$pdo = new PDO('mysql:dbname=library;host=localhost;charset=utf8', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+include_once $_SERVER['DOCUMENT_ROOT'].'/partials/config.php';
+include_once DOCUMENT_ROOT.'/database/db_connect.php';
 
 
 /**
@@ -68,7 +64,7 @@ $heading = 'Catalogue des livres';
                 </h2>
                 <!-- on crée un lien vers la page d'un auteur -->
                 <div class="book-card__body">
-                    <h3 class="book-card__subheading"><a href="author.php?id=<?= $book['author_id'] ?>">
+                    <h3 class="book-card__subheading"><a href="/pages/author.php?id=<?= $book['author_id'] ?>">
                             <i>
                                 <?= $book['name'] ?>
                             </i>
@@ -79,8 +75,8 @@ $heading = 'Catalogue des livres';
                     </p>
                 </div>
                 <div class="book-card__footer">
-                    <a href="book.php?id=<?= $book['id'] ?>">En savoir plus</a>
-                    <form id="form-<?= $book['id'] ?>" action="delete-book.php" method="post">
+                    <a href="pages/book.php?id=<?= $book['id'] ?>">En savoir plus</a>
+                    <form id="form-<?= $book['id'] ?>" action="pages/delete-book.php" method="post">
                         <input type="hidden" name="id" value="<?= $book['id'] ?>">
                         <button>Supprimer</button>
                     </form>

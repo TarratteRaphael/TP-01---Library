@@ -36,11 +36,8 @@ if (!$book_id) {
  * - Le mode d'erreur exception : permet de léver des exceptions lorsqu'une erreur sql est rencontrée.
  * - Le mode de récupération des données par défault (tableau associatif).
  */
-
-$pdo = new PDO('mysql:dbname=library;host=localhost;charset=utf8', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+// include_once $_SERVER['DOCUMENT_ROOT'].'/partials/config.php';
+include_once DOCUMENT_ROOT.'/database/db_connect.php';
 
 /**
  * 2. On récupère le livre.
