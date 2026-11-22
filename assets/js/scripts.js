@@ -1,4 +1,3 @@
-console.log('index.js chargé')
         window.addEventListener('DOMContentLoaded', function () {
             const forms = document.querySelectorAll('form');
             forms.forEach(function (form) {
