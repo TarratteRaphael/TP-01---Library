@@ -56,6 +56,10 @@ $stmt->execute([$author_id]);
 
 $author = $stmt->fetch();
 
+if (!$author) {
+    http_response_code(404);
+    die('Auteur introuvable.');
+}
 /**
  * 2. On récupère les livres de l'auteur.
  */
