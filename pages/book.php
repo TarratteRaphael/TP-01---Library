@@ -11,7 +11,12 @@
  * Si aucun livre n'est trouvé, on affiche une erreur 404
  * Sinon, on affiche le livre.
  */
+$book = $stmt->fetch();
 
+if (!$book) {
+    http_response_code(404);
+    die('Livre introuvable.');
+}
 /**
  * 1. On récupère le paramètre d'url id
  */
