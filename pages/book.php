@@ -11,12 +11,7 @@
  * Si aucun livre n'est trouvé, on affiche une erreur 404
  * Sinon, on affiche le livre.
  */
-$book = $stmt->fetch();
 
-if (!$book) {
-    http_response_code(404);
-    die('Livre introuvable.');
-}
 /**
  * 1. On récupère le paramètre d'url id
  */
@@ -61,7 +56,10 @@ $stmt->execute([$book_id]);
 
 $book = $stmt->fetch();
 
-
+if (!$book) {
+    http_response_code(404);
+    die('Livre introuvable.');
+}
 /**
  * On affiche la page
  */
@@ -72,16 +70,16 @@ $heading = $book['title'];
 
     <?php include_once '../partials/header.php'?>
     <header>
-        <h1><?= $book['title'] ?></h1>
+        <h1><?= htmlspecialchars($book['title']) ?></h1>
     </header>
 
     <main>
         <section>
-            <h2><?= $book['subtitle'] ?></h2>
-            <h3><a href="author.php?id=<?= $book['author_id'] ?>"><i><?= $book['name'] ?></i></a></h3>
-            <p><?= $book['description'] ?></p>
-            <p>Édition <?= $book['publisher'] ?> | date <?= $book['published'] ?> | p. <?= $book['pages'] ?></p>
-            <a href="<?= $book['website'] ?>">site internet</a>
+            <h2><?= htmlspecialchars($book['subtitle']) ?></h2>
+            <h3><a href="author.php?id=<?= htmlspecialchars($book['author_id']) ?>"><i><?= htmlspecialchars($book['name']) ?></i></a></h3>
+            <p><?= htmlspecialchars($book['description']) ?></p>
+            <p>Édition <?= htmlspecialchars($book['publisher']) ?> | date <?= htmlspecialchars($book['published']) ?> | p. <?= htmlspecialchars($book['pages']) ?></p>
+            <a href="<?= htmlspecialchars($book['website']) ?>">site internet</a>
         </section>
     </main>
 
