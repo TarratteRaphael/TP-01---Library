@@ -59,7 +59,7 @@ $heading = 'Catalogue des livres';
                     </p>
                 </div>
                 <div class="book-card__footer">
-                    <a href="pages/book.php?id=<?= $book['id'] ?>">En savoir plus</a>
+                    <a href="/pages/book.php?id=<?= $book['id'] ?>">En savoir plus</a>
                     <form id="form-<?= htmlspecialchars($book['id']) ?>" action="/fonction/delete-book.php" method="post">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($book['id']) ?>">
                         <button>Supprimer</button>
