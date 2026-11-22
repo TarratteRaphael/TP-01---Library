@@ -83,9 +83,9 @@ $heading = $author['name'];
 
     <?php include_once '../partials/header.php' ?>
     <header>
-        <h1>
+        <h2>
             <?= $author['name'] ?>
-        </h1>
+        </h2>
     </header>
 
     <main>
