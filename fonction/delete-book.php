@@ -58,5 +58,5 @@ $stmt->execute([$book_id]);
  * On redirige vers le catalogue de livres
  */
 
-header('Location: index.php');
+header('Location: /index.php');
 exit();
