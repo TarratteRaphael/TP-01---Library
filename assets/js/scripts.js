@@ -10,10 +10,8 @@
                         text: 'Voulez vous supprimer définitivement le livre ?',
                         icon: 'warning',
                         confirmButtonText: 'Supprimer'
-                    }).then(function (isConfirm) {
-                        if (isConfirm) {
-                            console.log('suppression confirmée', form);
-                            // soumission du formulaire par le code
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
                             form.submit();
                         }
                     });
