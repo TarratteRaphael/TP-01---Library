@@ -54,6 +54,11 @@ $stmt = $pdo->prepare('DELETE FROM `books` WHERE `id` = ?');
 
 $stmt->execute([$book_id]);
 
+if ($stmt->rowCount() === 0) {
+    http_response_code(404);
+    die('Livre introuvable.');
+}
+
 /**
  * On redirige vers le catalogue de livres
  */
