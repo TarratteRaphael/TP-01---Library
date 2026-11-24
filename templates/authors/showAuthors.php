@@ -1,4 +1,4 @@
-    <?php include_once '../partials/header.php' ?>
+    <?php include_once './templates/partials/header.php' ?>
     <header>
         <h2>
             <?= htmlspecialchars($author['name']) ?>
@@ -13,7 +13,7 @@
             <h2>Ouvrages publiés </h2>
             <ul>
                 <?php foreach ($books as $book): ?>
-                    <li><a href="book.php?id=<?= htmlspecialchars($book['id']) ?>">
+                    <li><a href="?page=book&id=<?= htmlspecialchars($book['id']) ?>">
                             <?= htmlspecialchars($book['title']) ?>
                         </a>
                     </li>
@@ -23,5 +23,5 @@
     </main>
 
     <?php
-include_once '../partials/footer.php';
+include_once './templates/partials/footer.php';
 ?>

@@ -1,18 +1,20 @@
-<?php
-define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
+    <?php
+    require_once __DIR__ . '/config/config.php';
+    
+    require_once DOCUMENT_ROOT . '/database/db_connect.php';
+    require_once DOCUMENT_ROOT . '/models/authors.php';
+    require_once DOCUMENT_ROOT . '/models/books.php';
+    require_once DOCUMENT_ROOT . '/controllers/authors.php';
+    require_once DOCUMENT_ROOT . '/controllers/books.php';  
 
-require_once DOCUMENT_ROOT . '/database/db_connect.php';
-require_once DOCUMENT_ROOT . '/models/authors.php';
-require_once DOCUMENT_ROOT . '/models/books.php';
-require_once DOCUMENT_ROOT . '/controllers/authors.php';
-require_once DOCUMENT_ROOT . '/controllers/books.php';
+    $pdo = db();
 
-$page = $_GET["page"] ?? "";
+    $page = $_GET["page"] ?? "";
 
-match ($page) {
-  "", "home" => listBookCtrl(),
-  "book" => showBookCtrl(),
-  "author" => showAuthorCtrl(),
-  "delete" => deleteBookCtrl(),
-  default => listBookCtrl()
-};
+    match ($page) {
+    "", "home" => listBookCtrl(),
+    "book" => showBookCtrl(),
+    "author" => showAuthorCtrl(),
+    "delete" => deleteBookCtrl(),
+    default => listBookCtrl()
+    };

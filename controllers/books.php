@@ -53,7 +53,7 @@ function deleteBookCtrl() {
 
 function listBookCtrl() {
 
-    $book = getAllBooks();
+    $books = getAllBooks();
 
     $title = 'Accueil';
     $heading = 'Catalogue des livres';
