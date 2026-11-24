@@ -45,7 +45,6 @@ if (!$author) {
     die('Auteur introuvable.');
 }
 
-
 /**
  * On affiche la page
  */

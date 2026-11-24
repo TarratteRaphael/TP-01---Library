@@ -24,6 +24,8 @@ function showBookCtrl() {
 
     $title = $book['title'];
     $heading = $book['title'];
+
+    require_once DOCUMENT_ROOT . './templates/books/showBooks.php';
 }
 
 function deleteBookCtrl() {
@@ -41,10 +43,12 @@ function deleteBookCtrl() {
     die("Vous devez définir renseigner un id valide");
     }
 
-    if ($stmt->rowCount() === 0) {
-    http_response_code(404);
-    die('Livre introuvable.');
+    if (!getDeleteBook($book_id)) {
+        http_response_code(404);
+        die('Livre introuvable.');
     }
+
+    header('location: /index.php');
 }
 
 function listBookCtrl() {
