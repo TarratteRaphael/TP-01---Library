@@ -1,7 +1,7 @@
 <?php
 
 // s'il n'existe pas de paramètre, on affiche le message d'erreur
-function bookNotExsit(int $book_id) {
+function bookNotExist(int $book_id) {
     if (!$book_id) {
         die("Vous devez définir un paramètre id valide dans l'url");
     }
