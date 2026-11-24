@@ -10,5 +10,9 @@ require_once DOCUMENT_ROOT . '/controllers/books.php';
 $page = $_GET["page"] ?? "";
 
 match ($page) {
-    
+  "", "home" => listBookCtrl(),
+  "book" => showBookCtrl(),
+  "author" => showAuthorCtrl(),
+  "delete" => deleteBookCtrl(),
+  default => listBookCtrl()
 };
