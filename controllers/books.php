@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Affiche la page de détail d'un livre (404 si le livre n'existe pas).
+ */
 function showBookCtrl() {
 
     $book_id = null;
@@ -25,6 +28,9 @@ function showBookCtrl() {
     require_once DOCUMENT_ROOT . '/templates/books/showBooks.php';
 }
 
+/**
+ * Supprime un livre puis redirige vers la page d'accueil.
+ */
 function deleteBookCtrl() {
 
     $book_id = null;
@@ -46,6 +52,9 @@ function deleteBookCtrl() {
     header('location: /index.php');
 }
 
+/**
+ * Affiche la page d'accueil avec la liste de tous les livres.
+ */
 function listBookCtrl() {
 
     $books = getAllBooks();

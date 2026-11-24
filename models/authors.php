@@ -1,7 +1,9 @@
 <?php
 
 /**
- * On récupère l'auteur.
+ * On récupère l'auteur à partir de son id
+ *
+ * @param int $author_id
  */
 function getAuthor(int $author_id ): array|false {
     
@@ -15,7 +17,7 @@ function getAuthor(int $author_id ): array|false {
 }
 
 /**
- * On récupère les livres de l'auteur.
+ * On récupère les livres de l'auteur à partir de son id
  */
 function getAuthorsBooks (int $author_id): array {
     

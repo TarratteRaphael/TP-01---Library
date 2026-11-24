@@ -1,6 +1,7 @@
 <?php
-
-
+/**
+ * Affiche la page d'un auteur et de ses livres (404 si l'auteur n'existe pas)
+ */
 function showAuthorCtrl() {
 
     $author_id = null;
