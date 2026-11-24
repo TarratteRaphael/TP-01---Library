@@ -42,17 +42,6 @@ include_once '../partials/config.php';
 include_once DOCUMENT_ROOT.'/database/db_connect.php';
 $pdo = db();
 
-/**
- * 2. On récupère le livre.
- */
-
-// on utilise la méthode prepare car notre requête a pas besoin d'un paramètre envoyé par l'utilisateur.
-
-$stmt = $pdo->prepare('DELETE FROM `books` WHERE `id` = ?');
-
-// on exécute la requête en précisant la valeur du paramètre
-
-$stmt->execute([$book_id]);
 
 if ($stmt->rowCount() === 0) {
     http_response_code(404);
