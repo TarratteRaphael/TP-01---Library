@@ -37,5 +37,5 @@ function getDeleteBook(int $book_id): bool {
     $stmt = $pdo->prepare('DELETE FROM `books` WHERE `id` = ?');
 
     // on exécute la requête en précisant la valeur du paramètre
-    return$stmt->execute([$book_id]);
+    return $stmt->execute([$book_id]);
 }
