@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CE FICHIER DOIT AFFICHER UN LIVRE. 
  */
@@ -39,8 +38,6 @@ if (!$book_id) {
 include_once '../partials/config.php';
 include_once DOCUMENT_ROOT.'/database/db_connect.php';
 $pdo = db();
-
-
 
 if (!$book) {
     http_response_code(404);
