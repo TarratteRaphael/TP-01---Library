@@ -32,7 +32,7 @@ function showAuthorCtrl() {
     
     $heading = $author['name'];
 
-    require_once DOCUMENT_ROOT . './templates/authors/showAuthors.php';
+    require_once DOCUMENT_ROOT . '/templates/authors/showAuthors.php';
 }
 
 // function listAuthorCtrl() {

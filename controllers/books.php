@@ -25,7 +25,7 @@ function showBookCtrl() {
     $title = $book['title'];
     $heading = $book['title'];
 
-    require_once DOCUMENT_ROOT . './templates/books/showBooks.php';
+    require_once DOCUMENT_ROOT . '/templates/books/showBooks.php';
 }
 
 function deleteBookCtrl() {
@@ -58,5 +58,5 @@ function listBookCtrl() {
     $title = 'Accueil';
     $heading = 'Catalogue des livres';
 
-    require_once DOCUMENT_ROOT . './templates/books/index.php';
+    require_once DOCUMENT_ROOT . '/templates/books/index.php';
 }
