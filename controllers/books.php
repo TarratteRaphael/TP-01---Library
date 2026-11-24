@@ -4,13 +4,10 @@ function showBookCtrl() {
 
     $book_id = null;
 
-    // on vérifie l'existance d'un paramètre id, non null, de type numérique
     if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
-        // on nettoie le paramètre pour se protéger contre les injections de code.
         $book_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
     }
 
-    // s'il n'existe pas de paramètre, on affiche le message d'erreur
     if (!$book_id) {
         die("Vous devez définir un paramètre id valide dans l'url");
     }
@@ -30,10 +27,8 @@ function showBookCtrl() {
 
 function deleteBookCtrl() {
 
-    // on déclare la variable qui va récevoir l'id et on l'initialise avec rien.
     $book_id = null;
 
-    // on vérifie l'existance d'un id, non null, de type numérique
     if (!empty($_POST['id']) && ctype_digit($_POST['id'])) {
         // on nettoie le paramètre pour se protéger contre les injections de code.
         $book_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
