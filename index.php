@@ -1,78 +1,29 @@
-<?php
+    <?php
 
-/**
- * CE FICHIER EST LA PAGE D'ACCUEIL DU SITE. ELLE DOIT AFFICHER LA LISTE DES LIVRES DISPONIBLES DANS NOTRE BIBLIOTHEQUE.
- * 
- * On devra se connecter à la base de données et récupérer une liste de livres triés par ordre alphabétique de titre. On va boucler sur la liste pour afficher chaque item de la liste.
- */
+    // fichier config qui définit la constante DOCUMENT_ROOT
+    require_once __DIR__ . '/config/config.php';
 
-/**
- * 1. Connexion à une base données mysql avec PDO.
- * On va créer une instance de PDO en précisant la source de données, les identifiants de connexion à la base base de données et deux options (facultatives)
- * - Le mode d'erreur exception : permet de léver des exceptions lorsqu'une erreur sql est rencontrée.
- * - Le mode de récupération des données par défault (tableau associatif).
- */
-include_once './partials/config.php';
-include_once DOCUMENT_ROOT.'/database/db_connect.php';
-$pdo = db();
+    // Connexion à la base de données
+    require_once DOCUMENT_ROOT . '/database/db_connect.php';
+    $pdo = db();
 
+    // Fichiers modèles
+    require_once DOCUMENT_ROOT . '/models/authors.php';
+    require_once DOCUMENT_ROOT . '/models/books.php';
 
-/**
- * 2. On récupère la liste des livres.
- */
+    // Fichiers controleurs
+    require_once DOCUMENT_ROOT . '/controllers/authors.php';
+    require_once DOCUMENT_ROOT . '/controllers/books.php';  
 
-// on utilise la méthode query car notre requête n'a pas besoin de paramètre.
+    // Récupère la page demandée dans l'URL (vide si aucun paramètre "page")
 
-$stmt = $pdo->query('SELECT * FROM `books` INNER JOIN `authors` ON `books`.`author_id` = `authors`.`id`');
+    $page = $_GET["page"] ?? "";
 
-//  on extrait les données de la réponse réçue.
-
-$books = $stmt->fetchAll();
-
-
-/**
- * On affiche la page
- */
-$title = 'Accueil';
-
-$heading = 'Catalogue des livres';
-?>
-
-
-    <?php include_once './partials/header.php' ?>
-    <main>
-        <?php foreach ($books as $book): ?>
-            <div class="book-card">
-                <h2 class="book-card__heading">
-                    <?= htmlspecialchars($book['title']) ?>
-                </h2>
-                <!-- on crée un lien vers la page d'un auteur -->
-                <div class="book-card__body">
-                    <h3 class="book-card__subheading"><a href="/pages/author.php?id=<?= htmlspecialchars($book['author_id']) ?>">
-                            <i>
-                                <?= htmlspecialchars($book['name']) ?>
-                            </i>
-                        </a>
-                    </h3>
-                    <p class="book-card__description">
-                        <?= htmlspecialchars($book['description']) ?>
-                    </p>
-                </div>
-                <div class="book-card__footer">
-                    <a href="/pages/book.php?id=<?= $book['id'] ?>">En savoir plus</a>
-                    <form id="form-<?= htmlspecialchars($book['id']) ?>" action="/fonction/delete-book.php" method="post">
-                        <input type="hidden" name="id" value="<?= htmlspecialchars($book['id']) ?>">
-                        <button>Supprimer</button>
-                    </form>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </main>
-
-
-<script src="/assets/js/scripts.js"></script>
-
-<?php
-include_once './partials/footer.php';
-?>
-
+    //Routeur
+    match ($page) {
+    "", "home" => listBookCtrl(),
+    "book" => showBookCtrl(),
+    "author" => showAuthorCtrl(),
+    "delete" => deleteBookCtrl(),
+    default => listBookCtrl()
+    };
