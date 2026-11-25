@@ -25,7 +25,7 @@ function showBookCtrl() {
     $title = $book['title'];
     $heading = $book['title'];
 
-    require_once DOCUMENT_ROOT . '/templates/books/showBooks.php';
+    renderViews('books/showBooks', compact('title', 'heading', 'book'));
 }
 
 /**
@@ -50,6 +50,7 @@ function deleteBookCtrl() {
     }
 
     header('location: /index.php');
+
 }
 
 /**
@@ -62,5 +63,5 @@ function listBookCtrl() {
     $title = 'Accueil';
     $heading = 'Catalogue des livres';
 
-    require_once DOCUMENT_ROOT . '/templates/books/index.php';
+    renderViews("books/index", compact('title', 'heading', 'books')); 
 }

@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script defer src="/assets/js/scripts.js"></script>
     <script defer src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -20,7 +21,7 @@
         </div>
     </header>
     <main>
-        <?php $main ?>
+        <?= $main ?>
     </main>
     <footer class="footer">
         <p>&copy; <?= date('Y') ?></p>
