@@ -28,5 +28,5 @@ function showAuthorCtrl() {
     
     $heading = $author['name'];
 
-    require_once DOCUMENT_ROOT . '/templates/authors/showAuthors.php';
+    renderViews('authors/showAuthors', compact('title', 'heading', 'author', 'books'));
 }

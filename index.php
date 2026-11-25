@@ -11,6 +11,9 @@
     require_once DOCUMENT_ROOT . '/models/authors.php';
     require_once DOCUMENT_ROOT . '/models/books.php';
 
+    //fichier de fonction renderViews
+    require_once DOCUMENT_ROOT . '/utils/viewUtils.php';
+
     // Fichiers controleurs
     require_once DOCUMENT_ROOT . '/controllers/authors.php';
     require_once DOCUMENT_ROOT . '/controllers/books.php';  

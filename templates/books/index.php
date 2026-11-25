@@ -1,5 +1,4 @@
-    <?php include_once './templates/partials/header.php' ?>
-    <main>
+    
         <?php foreach ($books as $book): ?>
             <div class="book-card">
                 <h2 class="book-card__heading">
@@ -26,11 +25,3 @@
                 </div>
             </div>
         <?php endforeach; ?>
-    </main>
-
-
-<script src="../assets/js/scripts.js"></script>
-
-<?php
-include_once './templates/partials/footer.php';
-?>
